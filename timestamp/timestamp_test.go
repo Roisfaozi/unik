@@ -71,9 +71,12 @@ func TestDuration(t *testing.T) {
 		expected string
 	}{
 		{"3 seconds", 3, "en", "3 seconds"},
-		{"1 min 40 sec", 100, "en", "1 minutes 40 seconds"},
+		{"1 min 40 sec", 100, "en", "1 minute 40 seconds"},
 		{"2 hours 20 mins", 8400, "en", "2 hours 20 minutes"},
 		{"ID 1 min 40 sec", 100, "id", "1 menit 40 detik"},
+		{"TH 1 min 40 sec", 100, "th", "1 นาที 40 วินาที"},
+		{"VN 1 min 40 sec", 100, "vi", "1 phút 40 giây"},
+		{"JP 1 min 40 sec", 100, "ja", "1 分 40 秒"},
 		{"Zero", 0, "en", "0 seconds"},
 	}
 
