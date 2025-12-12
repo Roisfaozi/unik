@@ -62,3 +62,27 @@ func TestSocial(t *testing.T) {
 		t.Errorf("Social() = %v, want '5 minutes ago'", got)
 	}
 }
+
+func TestDuration(t *testing.T) {
+	tests := []struct {
+		name     string
+		seconds  int64
+		lang     string
+		expected string
+	}{
+		{"3 seconds", 3, "en", "3 seconds"},
+		{"1 min 40 sec", 100, "en", "1 minutes 40 seconds"},
+		{"2 hours 20 mins", 8400, "en", "2 hours 20 minutes"},
+		{"ID 1 min 40 sec", 100, "id", "1 menit 40 detik"},
+		{"Zero", 0, "en", "0 seconds"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := timestamp.Duration(tt.seconds, timestamp.WithLanguage(tt.lang))
+			if got != tt.expected {
+				t.Errorf("Duration(%d) = '%v', want '%v'", tt.seconds, got, tt.expected)
+			}
+		})
+	}
+}

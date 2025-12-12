@@ -142,3 +142,11 @@ func ParseWithLayout(dateStr, layout string) (int64, error) {
 	}
 	return t.Unix(), nil
 }
+
+// Duration formats a duration in seconds into a detailed human-readable string.
+// Examples: "3 seconds", "1 minute 40 seconds", "2 hours 20 minutes".
+func Duration(seconds int64, opts ...Option) string {
+	cfg := resolveConfig(opts...)
+	d := time.Duration(seconds) * time.Second
+	return smart.Duration(d, cfg.Language)
+}

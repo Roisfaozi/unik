@@ -47,15 +47,15 @@ var (
 		},
 	}
 )
-// getTrans retrieves a translated string for a given language and key.
+// GetTrans retrieves a translated string for a given language and key.
 // If the language or key is not found, it falls back to English.
 //
 // Example:
 //
-//	s := getTrans("en", "just_now") // s will be "just now"
-//	s = getTrans("id", "just_now") // s will be "baru saja"
-//	s = getTrans("fr", "just_now") // s will be "just now" (falls back to en)
-func getTrans(lang, key string) string {
+//	s := GetTrans("en", "just_now") // s will be "just now"
+//	s = GetTrans("id", "just_now") // s will be "baru saja"
+//	s = GetTrans("fr", "just_now") // s will be "just now" (falls back to en)
+func GetTrans(lang, key string) string {
 	if dict, ok := translations[lang]; ok {
 		if val, ok := dict[key]; ok {
 			return val
@@ -99,7 +99,7 @@ func Social(t time.Time, lang string, style RelativeStyle) string {
 	year := 31536000.0
 
 	if seconds < 10 {
-		return getTrans(lang, "just_now")
+		return GetTrans(lang, "just_now")
 	}
 
 	var val int
@@ -129,12 +129,12 @@ func Social(t time.Time, lang string, style RelativeStyle) string {
 	}
 
 	if style == StyleShort {
-		return fmt.Sprintf("%d%s", val, getTrans(lang, unitShort))
+		return fmt.Sprintf("%d%s", val, GetTrans(lang, unitShort))
 	}
 
-	term := getTrans(lang, unit)
+	term := GetTrans(lang, unit)
 	if isPast {
-		return fmt.Sprintf("%d %s %s", val, term, getTrans(lang, "ago"))
+		return fmt.Sprintf("%d %s %s", val, term, GetTrans(lang, "ago"))
 	}
-	return fmt.Sprintf("%s %d %s", getTrans(lang, "in"), val, term)
+	return fmt.Sprintf("%s %d %s", GetTrans(lang, "in"), val, term)
 }
