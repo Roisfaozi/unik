@@ -13,56 +13,8 @@ const (
 	StyleShort                        
 )
 
-var (
-	translations = map[string]map[string]string{
-		"en": {
-			"just_now": "just now",
-			"ago":      "ago",
-			"in":       "in",
-			"s":        "s",
-			"m":        "m",
-			"h":        "h",
-			"d":        "d",
-			"y":        "y",
-			"sec":      "seconds",
-			"min":      "minutes",
-			"hour":     "hours",
-			"day":      "days",
-			"year":     "years",
-		},
-		"id": {
-			"just_now": "baru saja",
-			"ago":      "lalu",
-			"in":       "dalam",
-			"s":        "dtk",
-			"m":        "mnt",
-			"h":        "j",
-			"d":        "h",
-			"y":        "thn",
-			"sec":      "detik",
-			"min":      "menit",
-			"hour":     "jam",
-			"day":      "hari",
-			"year":     "tahun",
-		},
-	}
-)
-// GetTrans retrieves a translated string for a given language and key.
-// If the language or key is not found, it falls back to English.
-//
-// Example:
-//
-//	s := GetTrans("en", "just_now") // s will be "just now"
-//	s = GetTrans("id", "just_now") // s will be "baru saja"
-//	s = GetTrans("fr", "just_now") // s will be "just now" (falls back to en)
-func GetTrans(lang, key string) string {
-	if dict, ok := translations[lang]; ok {
-		if val, ok := dict[key]; ok {
-			return val
-		}
-	}
-	return translations["en"][key]
-}
+// (Translations moved to locale.go)
+
 
 // Social formats a time.Time into a human-readable relative time string (e.g., "just now", "5 minutes ago", "in 2 days").
 // It supports different languages and formatting styles (short or standard).
@@ -132,7 +84,9 @@ func Social(t time.Time, lang string, style RelativeStyle) string {
 		return fmt.Sprintf("%d%s", val, GetTrans(lang, unitShort))
 	}
 
-	term := GetTrans(lang, unit)
+	// Use GetPlural for standard style units (e.g. "minute" vs "minutes")
+	term := GetPlural(lang, unit, val)
+
 	if isPast {
 		return fmt.Sprintf("%d %s %s", val, term, GetTrans(lang, "ago"))
 	}

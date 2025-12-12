@@ -11,7 +11,7 @@ A robust, production-ready Go package for advanced time formatting, specifically
 - **Social Relative Time**: "5 minutes ago", "in 2 hours", or compact "5m", "2h".
 - **Deep Regional Support**:
   - **ASEAN**: Indonesia (Localized months), Thailand (Buddhist Era 2566), Vietnam, Malaysia, Philippines.
-  - **Global**: US (MM/DD/YYYY), EU (DD/MM/YYYY), Japan/China (YYYY/MM/DD), Canada (YYYY-MM-DD).
+- **Duration Formatting**: Converts seconds to readable string (e.g., "1 minute 40 seconds").
 - **Performance**: Built-in efficient timezone handling with caching.
 - **Zero Boilerplate**: Simple, expressive API.
 
@@ -44,6 +44,9 @@ func main() {
 	// Social (Best for Comments/Status)
 	fmt.Println(timestamp.Social(now - 300)) // "5 minutes ago"
 	fmt.Println(timestamp.SocialShort(now - 3600)) // "1h"
+
+	// Duration
+	fmt.Println(timestamp.Duration(100)) // "1 minute 40 seconds"
 
 	// Regional Formats
 	fmt.Println(timestamp.Regional(now, regional.RegionID)) // "11 Desember 2025"
@@ -94,6 +97,7 @@ type PostResponse struct {
 	TimeAgo    string `json:"time_ago"`    // e.g. "5 minutes ago"
 	SmartDate  string `json:"smart_date"`  // e.g. "Just now", "25 Dec"
 	DetailDate string `json:"detail_date"` // e.g. "25 Desember 2023"
+	Duration   string `json:"read_time"`   // e.g. "3 minutes"
 }
 
 func main() {
@@ -126,6 +130,9 @@ func main() {
 
 				// Format 3: Explicit Regional (Formal Context)
 				DetailDate: timestamp.Regional(p.CreatedAt, regional.RegionID),
+
+				// Format 4: Duration (e.g. Read Time based on length)
+				Duration: timestamp.Duration(180), // e.g. 3 minutes read
 			}
 			responses = append(responses, res)
 		}
@@ -177,6 +184,14 @@ fmt.Println(parsedUnix) // 1703462400
 
 // Custom Layout Parsing
 unix2, _ := timestamp.ParseWithLayout("2023-12-25", "2006-01-02")
+
+// 5. Native Calendar Systems (e.g. Japanese Gengo)
+// Output: "Reiwa 6/05/01"
+jpEra := timestamp.Regional(time.Date(2024, 5, 1, 0, 0, 0, 0, time.UTC).Unix(),
+	regional.RegionJP,
+	timestamp.WithCalendar(regional.JapaneseCalendar{}),
+)
+fmt.Println(jpEra)
 ```
 
 ### 4. Localization & Timezone Configuration

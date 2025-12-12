@@ -51,7 +51,16 @@ func main() {
 	// Japan
 	fmt.Printf("Japan (JP):     %s\n", timestamp.Regional(unixNow, regional.RegionJP,
 		timestamp.WithTimezone("Asia/Tokyo")))
+	
+	// Japan (Native Era)
+	fmt.Printf("Japan (Era):    %s\n", timestamp.Regional(unixNow, regional.RegionJP,
+		timestamp.WithTimezone("Asia/Tokyo"),
+		timestamp.WithCalendar(regional.JapaneseCalendar{})))
 
 	fmt.Println("\n4. Formal/Legal:")
 	fmt.Printf("Formal: %s\n", timestamp.Formal(unixNow, timestamp.WithTimezone("Asia/Jakarta")))
+
+	fmt.Println("\n5. Duration:")
+	fmt.Printf("Seconds (100s): %s\n", timestamp.Duration(100))
+	fmt.Printf("Complex (8400s): %s\n", timestamp.Duration(8400))
 }

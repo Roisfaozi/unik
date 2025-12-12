@@ -3,17 +3,21 @@ package timestamp
 import (
 	"sync"
 	"time"
+
+	"github.com/Roisfaozi/unik/timestamp/regional"
 )
 
 type Config struct {
 	DefaultTimezone string
 	Language        string
+	Calendar        regional.CalendarSystem
 }
 
 var (
 	defaultConfig = Config{
 		DefaultTimezone: "UTC",
 		Language:        "en",
+		Calendar:        nil,
 	}
 	configLock sync.RWMutex
 )
@@ -45,6 +49,13 @@ func WithTimezone(tz string) Option {
 func WithLanguage(lang string) Option {
 	return func(c *Config) {
 		c.Language = lang
+	}
+}
+
+// WithCalendar sets a calendar system for the operation.
+func WithCalendar(cal regional.CalendarSystem) Option {
+	return func(c *Config) {
+		c.Calendar = cal
 	}
 }
 

@@ -19,7 +19,8 @@ var monthsID = []string{
 //   fmt.Println(Format(t, RegionEU, ""))     // Output: "15/11/2023 10:30"
 //   fmt.Println(Format(t, RegionID, LangID)) // Output: "15 November 2023"
 //   fmt.Println(Format(t, RegionTH, ""))     // Output: "15/11/2566" (assuming 2023 + 543 = 2566 BE)
-func Format(t time.Time, region Region, lang string) string {
+// Format formats a time.Time object based on the specified region and optional calendar system.
+func Format(t time.Time, region Region, lang string, calendar CalendarSystem) string {
 	switch region {
 	case RegionUS:
 		return t.Format("01/02/2006 03:04 PM")
@@ -31,7 +32,6 @@ func Format(t time.Time, region Region, lang string) string {
 		if lang == LangID {
 			return formatID(t)
 		}
-
 		return formatID(t) 
 	case RegionTH:
 		return formatTH(t)
@@ -42,6 +42,11 @@ func Format(t time.Time, region Region, lang string) string {
 	case RegionPH:
 		return t.Format("01/02/2006")
 	case RegionJP:
+		if calendar != nil {
+			y, m, d, era := calendar.Transform(t)
+			// Format: "Era Year/MM/DD" -> "Reiwa 6/05/01"
+			return fmt.Sprintf("%s %d/%02d/%02d", era, y, m, d)
+		}
 		return t.Format("2006/01/02")
 	case RegionKR:
 		return t.Format("2006.01.02")
