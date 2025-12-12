@@ -23,12 +23,9 @@ func (hc HijriCalendar) Transform(t time.Time) (year int, month int, day int, er
 
 	// 2. Convert JD to Hijri
 	// Epoch: July 16, 622 AD (Julian Calendar) = JD 1948440
-	// We use 1948439 to align with the "Standard" 1445-01-01 = 2023-07-19 mapping
-	// Use 1948440 for Kuwaiti.
-	days := jd - 1948440 + 1 // Add 1 day offset adjustment if needed to match vision
-	// Let's stick to 1948440 standard first, check output.
-	
-	days = jd - 1948440
+	// Epoch: July 16, 622 AD (Julian Calendar) = JD 1948440
+	// Standard Tabular Islamic Calendar (Kuwaiti Algorithm)
+	days := jd - 1948440
 
 	// 30-year cycle: 10631 days
 	cycle := days / 10631
