@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/Roisfaozi/unik/compare/v0.2.0...v0.3.0) (2025-12-12)
+
+
+### Features
+
+* add a demo application, native calendar example to README, and update roadmap progress for language and era support. ([04e3db1](https://github.com/Roisfaozi/unik/commit/04e3db1029325156e057b2ab7a2aa51da14de93d))
+* Add regional calendar systems (Hijri, Japanese) and integrate them into regional date formatting. ([7152a6d](https://github.com/Roisfaozi/unik/commit/7152a6dff0f893fc4bcb1ba79259fa51ddab38c2))
+* **i18n:** impl deep localization engine & asian langs support ([1e061a2](https://github.com/Roisfaozi/unik/commit/1e061a2189104b7dcfe94a50bb9244f917cf1b65))
+* Implement GitHub Actions CI/CD workflows for dev, staging, and release, and ignore coverage files. ([5445772](https://github.com/Roisfaozi/unik/commit/5445772974da4f433070f6aa94ad025bf238b007))
+* implement Hijri calendar and update test coverage report. ([1d8ee8f](https://github.com/Roisfaozi/unik/commit/1d8ee8f469dd86f75505bae20b80baf8a8bb8e1b))
+* Introduce a comprehensive timestamp utility with smart, social, and regional formatting, including Japanese calendar support, and update documentation. ([4d13173](https://github.com/Roisfaozi/unik/commit/4d13173e26068043e9144ae7285c3a47e24cde50))
+
 ## [0.2.0](https://github.com/Roisfaozi/unik/compare/v0.1.0...v0.2.0) (2025-12-12)
 
 
