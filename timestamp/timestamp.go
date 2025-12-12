@@ -66,7 +66,7 @@ func SocialShort(unix int64, opts ...Option) string {
 func Regional(unix int64, region regional.Region, opts ...Option) string {
 	cfg := resolveConfig(opts...)
 	t := util.Normalize(UnixToTime(unix), cfg.DefaultTimezone)
-	return regional.Format(t, region, cfg.Language)
+	return regional.Format(t, region, cfg.Language, cfg.Calendar)
 }
 
 // FullDateTime formats a Unix timestamp into a verbose date and time string.
