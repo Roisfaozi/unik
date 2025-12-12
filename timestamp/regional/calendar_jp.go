@@ -15,24 +15,27 @@ var (
 	dateMeiji  = time.Date(1868, 1, 25, 0, 0, 0, 0, time.UTC) // Approximate Gregorian start
 )
 
-func (jc JapaneseCalendar) Transform(t time.Time) (era string, year int) {
+func (jc JapaneseCalendar) Transform(t time.Time) (year int, month int, day int, era string) {
+	m := int(t.Month())
+	d := t.Day()
+
 	// Check eras from newest to oldest
 	if !t.Before(dateReiwa) {
-		return "Reiwa", t.Year() - 2018
+		return t.Year() - 2018, m, d, "Reiwa"
 	}
 	if !t.Before(dateHeisei) {
-		return "Heisei", t.Year() - 1988
+		return t.Year() - 1988, m, d, "Heisei"
 	}
 	if !t.Before(dateShowa) {
-		return "Showa", t.Year() - 1925
+		return t.Year() - 1925, m, d, "Showa"
 	}
 	if !t.Before(dateTaisho) {
-		return "Taisho", t.Year() - 1911
+		return t.Year() - 1911, m, d, "Taisho"
 	}
 	if !t.Before(dateMeiji) {
-		return "Meiji", t.Year() - 1867
+		return t.Year() - 1867, m, d, "Meiji"
 	}
 
-	// Fallback for pre-Meiji (just return Gregorian as a safety or a specific "Pre-Meiji" era)
-	return "Seireki", t.Year()
+	// Fallback for pre-Meiji
+	return t.Year(), m, d, "Seireki"
 }

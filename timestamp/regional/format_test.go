@@ -45,6 +45,21 @@ func TestFormat_JPEra(t *testing.T) {
 	}
 }
 
+func TestFormat_HijriEra(t *testing.T) {
+	// July 19, 2023 is approx 1 Muharram 1445
+	tm := time.Date(2023, 7, 19, 0, 0, 0, 0, time.UTC)
+	
+	// We use RegionJP just to trigger the calendar logic in Format function for now
+	// In the future, we might have specific formatting for RegionAR or generic
+	got := Format(tm, RegionJP, LangEN, HijriCalendar{})
+
+	// Expected: AH 1445/01/01
+	expected := "AH 1445/01/01"
+	if got != expected {
+		t.Errorf("Format Hijri Era = %q, want %q", got, expected)
+	}
+}
+
 func TestFormatID_EdgeCases(t *testing.T) {
 	jan := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
 	if got := Format(jan, RegionID, LangID, nil); got != "01 Januari 2023" {

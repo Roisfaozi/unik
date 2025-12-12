@@ -5,7 +5,7 @@ import "time"
 // CalendarSystem defines the interface for converting a Gregorian time
 // into a specific cultural calendar era and year.
 type CalendarSystem interface {
-	// Transform returns the era name and the year within that era for a given time.
-	// Example for Japanese Calendar (2024): era="Reiwa", year=6
-	Transform(t time.Time) (era string, year int)
+	// Transform converts a Gregorian time into the specific calendar's date components.
+	// Returns: year, month, day, and era name (optional).
+	Transform(t time.Time) (year int, month int, day int, era string)
 }

@@ -12,20 +12,20 @@ This document outlines the strategic development plan for `unik`. The goal is to
 - [x] Implement robust PluralRules (e.g., "1 minute" vs "2 minutes").
 - [x] Basic support for EN and ID.
 
-### 1.2 Expanded Language Support (🚧 Next Steps)
+### 1.2 Expanded Language Support (✅ Completed)
 
-- [ ] **Thailand (TH)**: Add dictionary and specific Particles.
-- [ ] **Vietnam (VN)**: Add dictionary.
-- [ ] **Japan (JP)**: Add dictionary (Counter suffix support).
-- [ ] **Malaysia (MY)**: Add dictionary (similar to ID but distinct).
+- [x] **Thailand (TH)**: Add dictionary and specific Particles.
+- [x] **Vietnam (VN)**: Add dictionary.
+- [x] **Japan (JP)**: Add dictionary (Counter suffix support).
+- [x] **Malaysia (MY)**: Add dictionary (similar to ID but distinct).
 - [ ] **Arabic (AR)**: (Optional) Complex dual plural handling.
 
-### 1.3 Native Era Support
+### 1.3 Native Era Support (✅ Completed)
 
-- [ ] Create `CalendarSystem` interface.
-- [ ] **Japanese Era**: Support changing `2024` -> `Reiwa 6`.
-- [ ] **Hijri Calendar**: Support Islamic date conversion.
-- [ ] Update `Regional` function to accepted `WithCalendar(...)` option.
+- [x] Create `CalendarSystem` interface.
+- [x] **Japanese Era**: Support changing `2024` -> `Reiwa 6`.
+- [x] **Hijri Calendar**: Support Islamic date conversion (Tabular).
+- [x] Update `Regional` function to accepted `WithCalendar(...)` option.
 
 ## Phase 2: Robust & Fuzzy Parsing (v0.3.0)
 

@@ -43,9 +43,9 @@ func Format(t time.Time, region Region, lang string, calendar CalendarSystem) st
 		return t.Format("01/02/2006")
 	case RegionJP:
 		if calendar != nil {
-			era, y := calendar.Transform(t)
+			y, m, d, era := calendar.Transform(t)
 			// Format: "Era Year/MM/DD" -> "Reiwa 6/05/01"
-			return fmt.Sprintf("%s %d/%s", era, y, t.Format("01/02"))
+			return fmt.Sprintf("%s %d/%02d/%02d", era, y, m, d)
 		}
 		return t.Format("2006/01/02")
 	case RegionKR:
