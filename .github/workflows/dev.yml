@@ -1,0 +1,25 @@
+name: Dev Delivery
+
+on:
+  push:
+    branches: [ "dev" ]
+
+jobs:
+  ci-dev:
+    name: Dev Integration
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.22'
+
+    - name: Test
+      run: go test -v ./...
+
+    - name: Snapshot Build (Cross-Platform Verification)
+      run: |
+        GOOS=linux GOARCH=amd64 go build -v ./...
+        GOOS=windows GOARCH=amd64 go build -v ./...
