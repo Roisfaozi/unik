@@ -184,6 +184,14 @@ fmt.Println(parsedUnix) // 1703462400
 
 // Custom Layout Parsing
 unix2, _ := timestamp.ParseWithLayout("2023-12-25", "2006-01-02")
+
+// 5. Native Calendar Systems (e.g. Japanese Gengo)
+// Output: "Reiwa 6/05/01"
+jpEra := timestamp.Regional(time.Date(2024, 5, 1, 0, 0, 0, 0, time.UTC).Unix(),
+	regional.RegionJP,
+	timestamp.WithCalendar(regional.JapaneseCalendar{}),
+)
+fmt.Println(jpEra)
 ```
 
 ### 4. Localization & Timezone Configuration
