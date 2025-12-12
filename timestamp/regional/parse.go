@@ -113,7 +113,9 @@ func parseTH(dateStr string) (time.Time, error) {
     yearBE := parts[2]
     
     var yBE int
-    fmt.Sscanf(yearBE, "%d", &yBE)
+    if _, err := fmt.Sscanf(yearBE, "%d", &yBE); err != nil {
+        return time.Time{}, fmt.Errorf("invalid year BE: %w", err)
+    }
     yAD := yBE - 543
     
     isoStr := fmt.Sprintf("%04d-%s-%s", yAD, month, day)
