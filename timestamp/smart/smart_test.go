@@ -21,7 +21,7 @@ func TestSocial(t *testing.T) {
 		{"5 mins ago Short", -5 * time.Minute, "en", StyleShort, "5m"},
 		{"5 mins ago ID", -5 * time.Minute, "id", StyleStandard, "5 menit lalu"},
 		{"2 hours ago", -2 * time.Hour, "en", StyleStandard, "2 hours ago"},
-		{"In 5 mins", 5 * time.Minute, "en", StyleStandard, "in 5 minutes"},
+		{"In 5 mins", 5*time.Minute + 2*time.Second, "en", StyleStandard, "in 5 minutes"},
 	}
 
 	for _, tt := range tests {
